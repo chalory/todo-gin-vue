@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>To-Do List</h1>
+    <h1>ToDo List</h1>
     <ul>
       <li v-for="item in todolist" v-bind:key="item"></li>
     </ul>
@@ -24,11 +24,20 @@ export default {
     getList: getList
   }
 }
-function getList() {
-  axios.get("/api/lists").then( res => {
-    appData.todolist = res.data.list
-  });
+// function getList() {
+//   axios.get("http://192.168.1.27:8081/api/lists").then( res => {
+//     appData.todolist = res.data.list
+//   });
+// }
+async function getList() {
+  try {
+    const response = await axios.get('http://192.168.1.27:8080/api/lists');
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
 }
+
 </script>
 
 <style>
