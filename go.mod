@@ -3,10 +3,12 @@ module go-vue
 go 1.13
 
 require (
+	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/contrib v0.0.0-20201101042839-6a891bf89f19
 	github.com/gin-gonic/gin v1.8.0
 	github.com/go-playground/validator/v10 v10.11.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/rs/cors/wrapper/gin v0.0.0-20220223021805-a4a5ce87d5a2 // indirect
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e // indirect
 	golang.org/x/net v0.0.0-20220531201128-c960675eff93 // indirect
 )

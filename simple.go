@@ -2,43 +2,36 @@ package main
 
 import (
 	"net/http"
-	"strconv"
 
-	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
+	cors "github.com/rs/cors/wrapper/gin"
 )
 
-var todos []string
+// var todos []string
+
+type entry struct {
+	ID        int    `json:"id"`
+	Entry     string `json:"entry"`
+	Date      string `json:"date"`
+	User_name string `json:"user_name"`
+}
+
+var todos = []entry{
+	{ID: 1, Entry: "null", Date: "null", User_name: "null"},
+	{ID: 1, Entry: "My first message", Date: "05/18/2022", User_name: "user1"},
+	{ID: 2, Entry: "Hi name is user2", Date: "05/19/2022", User_name: "user2"},
+	{ID: 3, Entry: "I made third message", Date: "05/20/2022", User_name: "user1"},
+}
 
 func Lists(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Headers", "Content-Type")
 	c.JSON(http.StatusOK, gin.H{"list": todos})
 }
 
-func ListItem(c *gin.Context) {
-	errormessage := "Index out of range"
-	indexstring := c.Param("index")
-	if index, err := strconv.Atoi(indexstring); err == nil && index < len(todos) {
-		c.JSON(http.StatusOK, gin.H{"item": todos[index]})
-	} else {
-		if err != nil {
-			errormessage = "Number expected: " + indexstring
-		}
-		c.JSON(http.StatusBadRequest, gin.H{"error": errormessage})
-	}
-}
-
-func AddListItem(c *gin.Context) {
-	item := c.PostForm("item")
-	todos = append(todos, item)
-	c.String(http.StatusCreated, c.FullPath()+"/"+strconv.Itoa(len(todos)-1))
-}
-
 func main() {
-	todos = append(todos, "Write the application")
 	r := gin.Default()
-	r.Use(static.Serve("/", static.LocalFile("./todo-vue/dist", false)))
+	r.Use(cors.Default())
 	r.GET("/api/lists", Lists)
-	r.GET("/api/lists/:index", ListItem)
-	r.POST("/api/lists", AddListItem)
 	r.Run()
 }

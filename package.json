@@ -1,0 +1,23 @@
+{
+  "name": "todo-gin-vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chalory/todo-gin-vue.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chalory/todo-gin-vue/issues"
+  },
+  "homepage": "https://github.com/chalory/todo-gin-vue#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "vue-router": "^4.0.15"
+  }
+}
